@@ -5,26 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <title>WakeUpTimes App</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
+    <header>
+      <button id="theme-toggle" title="Toggle dark/light mode">🌙</button>
+    </header>
     <main id="app">
       <section id="prompt-section">
         <h1>WakeUpTimes App</h1>
-        <p>
-          A sleep cycle lasts about 90 minutes, and a good night's sleep
-          consists of 5-6 sleep cycles.
-        </p>
-        <p>
-          If you wake up in the middle of a sleep cycle, you will feel groggy,
-          even if you've completed several cycles prior to waking up.
-        </p>
-        <p>If you go to bed now, when should you wake up?</p>
-        <button id="calc-btn">Calculate</button>
+        <div class="info-cards">
+          <div class="info-card">
+            <p>
+              A sleep cycle lasts about 90 minutes, and a good night's sleep
+              consists of 5-6 sleep cycles.
+            </p>
+          </div>
+          <div class="info-card">
+            <p>
+              If you wake up in the middle of a sleep cycle, you will feel groggy,
+              even if you've completed several cycles prior to waking up.
+            </p>
+          </div>
+        </div>
+        <p class="question">If you go to bed now, when should you wake up?</p>
+        <button id="calc-btn">Calculate Sleep Times</button>
+
+        <!-- 추가: 기상 시간 입력 폼 -->
+        <form id="bedtime-form" autocomplete="off">
+          <label for="wake-time" class="question">Want to wake up at a specific time?</label>
+          <input type="time" id="wake-time" required>
+          <button type="submit" id="bedtime-btn">Recommend Bedtimes</button>
+        </form>
+        <div id="bedtime-result" class="hidden">
+          <p class="result-title">To wake up at your chosen time, try to fall asleep at one of these times:</p>
+          <div id="bedtime-hours-div" class="wakeup-hours"></div>
+          <p class="note"><sup>*</sup>It takes the average human fourteen minutes to fall asleep.</p>
+        </div>
       </section>
 
       <div id="img-container">
@@ -33,11 +50,11 @@
 
       <section id="result-section" class="hidden">
         <div class="button-group">
-          <button id="return-btn">←</button>
-          <button id="refresh-btn">Refresh</button>
+          <button id="return-btn">← Back</button>
+          <button id="refresh-btn">↻ Refresh</button>
         </div>
 
-        <p>
+        <p class="result-title">
           If you go to bed right now<sup>*</sup>, try to wake up at one of these
           times:
         </p>
@@ -51,7 +68,7 @@
           <div id="cycle-6" class="cycle">7:45 AM</div>
         </div>
 
-        <p>
+        <p class="note">
           <sup>*</sup>It takes the average human fourteen minutes to fall
           asleep.
         </p>
